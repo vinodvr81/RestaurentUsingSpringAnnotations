@@ -1,0 +1,2 @@
+# SpringStereotypeAnnotationsSelfPractise
+Spring Stereotype Annotations self practise
