@@ -8,7 +8,7 @@ import com.foodrestaurent.menu.model.Menu;
 
 @Service
 public class ItemsOfRestaurent {
-	private HashSet<Menu> menuItems = new HashSet<>();
+	public HashSet<Menu> menuItems = new HashSet<>();
 
 	public ItemsOfRestaurent() {
 		// TODO Auto-generated constructor stub
@@ -24,11 +24,16 @@ public class ItemsOfRestaurent {
 	}
 
 	public HashSet<Menu> getMenuItems() {
+		this.addItems();
 		return menuItems;
 	}
 
 	public void setMenuItems(HashSet<Menu> menuItems) {
 		this.menuItems = menuItems;
+	}	
+	
+	public void removeMenuItem(String ItemPrice, String Price) {
+		this.menuItems.remove(new Menu(ItemPrice, Price));
 	}	
 	
 }
