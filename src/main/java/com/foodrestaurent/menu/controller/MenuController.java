@@ -2,6 +2,7 @@ package com.foodrestaurent.menu.controller;
 
 import java.util.HashSet;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import com.foodrestaurent.menu.service.ItemsOfRestaurent;
 
 @RestController
 public class MenuController {
+	
+	@Autowired
 	private ItemsOfRestaurent ioftt = new ItemsOfRestaurent();
 
 	// http://localhost:8082/menus
@@ -43,12 +46,13 @@ public class MenuController {
 	}
 	
 	
+	
 	// e.g http://localhost:8082/Idly
 	@PutMapping("/{ItemName}")
 	public void  putItemVariable(@PathVariable(name = "ItemName") String ItemName, @RequestBody HashSet<Menu>  add_item) {
 		for(Menu men: this.getMenus()) {
-			if (men.ItemName().equals(ItemName)) {
-				this.ioftt.removeMenuItem(men.ItemName(), men.Price());
+			if (ItemName.equals(men.getItemName())) {
+				this.ioftt.removeMenuItem(men.getItemName(), men.getPrice());
 				this.ioftt.setMenuItems(add_item);				
 			}
 		}
@@ -58,8 +62,8 @@ public class MenuController {
 	@DeleteMapping("/{ItemName}")
 	public void  deleteItemVariable(@PathVariable(name = "ItemName") String ItemName) {
 		for(Menu men: this.getMenus()) {
-			if (men.ItemName().equals(ItemName)) {
-				this.ioftt.removeMenuItem(men.ItemName(), men.Price());		
+			if (ItemName.equals(men.getItemName())){
+				this.ioftt.removeMenuItem(men.getItemName(), men.getPrice());		
 			}
 		}
 	}
